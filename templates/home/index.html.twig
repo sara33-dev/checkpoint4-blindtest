@@ -4,62 +4,32 @@
 
 {% block body %}
 
-    {% if app.user %}
-<div class="d-flex justify-content-center">
-    {{ include('component/_progress.html.twig') }}
-</div>
-    {% endif %}
+
     {{ include('component/_classement.html.twig') }}
 
     {% if app.user %}
-    <div class="d-flex justify-content-center mt-5">
-
-    <div class=" mt-5 ">
-        <form action="{{ path('titre_guess') }}" method="POST">
-
-            {% for chanson in chansonsToGuess[0].chansons %}
-
-
-                <a class="list-group ">
-
-                    <div class="dropdown card bg-transparent justify-content-center" style="width: 400px;" >
-
-                        <button class="btn btn-secondary border-info bg-transparent dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <a href="" class="list-group-item bg-transparent">
-                                <h5 class="mb-1 text-light">CHANSON MYSTERE <span class="badge badge-info badge-pill">{{ loop.index }}</span></h5>
+        <div class="flex-column">
+        <h4 class=" mt-5 d-flex justify-content-center">HELLO {{ app.user.pseudo }} <br> CHOISIS UNE PLAYLIST <br> ET VA DEFIER LES MEILLEURS DU CLASSEMENT</h4>
+        <div class="d-flex justify-content-center">
+            <ul class="list-unstyled">
+                {% for playlist in chansonsToGuess %}
+                    <li>
+                        <div class=" m-1">
+                            <img class="" src="{{ playlist.urlImage }}" alt="imagePlaylist"
+                                 style="width: 50px;">{{ playlist.nom }}<i class="fas fa-volume-down"></i>
+                            <a href="{{ path('playlist_show', {'id': playlist.id}) }}">
+                                <i class="fas fa-play btn btn-danger"></i>
                             </a>
-                        </button>
-
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-
-                            <button class="dropdown-item bg-transparent" type="button">
-
-
-                                    <div class="d-flex justify-content-center embed-responsive-21by9 mt-1">
-                                        <iframe class="embed-responsive-item"
-                                                src="https://www.youtube.com/embed/{{ chanson.youtubeId[32:] }}">
-                                        </iframe>
-                                    </div>
-
-                            </button>
-
                         </div>
 
-                        <label for="titre"> <span class="badge badge-info badge-pill">Titre : </span></label>
-                            <input type="text" id="titre" name="title[{{ chanson.id }}]]"/>
+                    </li>
+                {% endfor %}
+            </ul>
 
-                    </div>
-                </a>
-
-            {% endfor %}
-
-            <button class="btn btn-info mt-1">Valider</button>
+        </div>
             {% else %}
         <h4 class=" mt-5 d-flex justify-content-center">CONNECTE TOI POUR AFFRONTER LES <br> AUTRES JOUEURS SUR UNE PLAYLIST</h4>
             {% endif %}
-        </form>
-
     </div>
-</div>
 
 {% endblock %}

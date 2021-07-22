@@ -42,7 +42,9 @@
 
                         <p>  Défie un joueur sur ce blindtest !</p>
                         <p><i class="fas fa-blind"></i>{{ playlist.chansons|length }} chansons dans cette playlist</p>
+                        <a href="{{ path('playlist_show', {'id': playlist.id}) }}">
                         <h1><i class="fas fa-play btn btn-danger"></i></h1>
+                        </a>
                     </div>
                 </div>
 

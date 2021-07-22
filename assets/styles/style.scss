@@ -11,22 +11,8 @@ body {
   background-size: cover;
 }
 
-mark {
-  background-color: --$lightPink;
-  color: --$blue;
-}
-
-strong {
-  background-color: --$blue;
-  color: --$lightSalmon;
-}
-
 iframe {
   filter : blur(20px);
 }
 
-.dropdown-item {
-  text-decoration-color: antiquewhite;
-  text-shadow: deeppink;
-}
 

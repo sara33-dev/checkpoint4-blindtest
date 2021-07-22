@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Playlist;
 use App\Form\PlaylistType;
 use App\Repository\PlaylistRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -56,6 +57,39 @@ class PlaylistController extends AbstractController
         return $this->render('playlist/show.html.twig', [
             'playlist' => $playlist,
         ]);
+    }
+
+
+    /**
+     * @Route("/playlist/{id}/guess", name="playlist_titre_guess")
+     */
+    public function titreGuessPlaylist(Request $request, PlaylistRepository $playlistRepository, EntityManagerInterface $entityManager, Playlist $playlist): Response
+    {
+        $allSongs = $playlistRepository->findOneBy(['id' => $playlist->getId()]);
+
+        $chansonsGiven = $allSongs->getChansons();
+
+
+        $titles = '';
+        for ($i = 0; $i <= count($chansonsGiven) - 1; $i++) {
+            $titles .= $chansonsGiven[$i]->getTitre() . '-';
+
+        }
+        $titlesGiven = explode('-', $titles);
+        $titlesClean = array_pop($titlesGiven);
+
+        $titlesAnswers = $request->get('title');
+
+        $false = array_diff($titlesGiven, $titlesAnswers);
+
+
+        $result = (count($chansonsGiven)) - (count($false));
+
+
+        $entityManager->persist($this->getUser()->setPoints($result));
+        $entityManager->flush();
+
+        return $this->redirectToRoute('home');
     }
 
     /**
