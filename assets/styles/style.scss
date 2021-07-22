@@ -10,3 +10,14 @@ body {
   background-attachment: fixed;
   background-size: cover;
 }
+
+mark {
+  background-color: --$lightPink;
+  color: --$blue;
+}
+
+strong {
+  background-color: --$blue;
+  color: --$lightSalmon;
+}
+

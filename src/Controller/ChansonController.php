@@ -39,7 +39,7 @@ class ChansonController extends AbstractController
             $entityManager->persist($chanson);
             $entityManager->flush();
 
-            return $this->redirectToRoute('chanson_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('playlist_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('chanson/new.html.twig', [

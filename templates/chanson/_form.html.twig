@@ -1,4 +1,20 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<div class="d-flex justify-content-center mt-5">
+    <h2 class="border-light bg-info text-light btn mt-5">Ajoute une chanson</h2>
+</div>
+<p class="small d-flex justify-content-center"><strong>Piège les joueurs en trouvons les sons la chanson que tout le monde a oublié</strong></p>
+<div class=" form-register row justify-content-center align-content-center">
+    <div id="concept" class="home-section container bg-transparent col-11 rounded mb-5 pt-3 p-1 shadow mt-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-10 col-sm-10 ">
+                <a class="btn-info btn d-flex justify-content-end" href="{{ path('playlist_index') }}">Retour aux Playlist</a>
+                {% form_theme form 'bootstrap_4_layout.html.twig' %}
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <button class="btn btn-info">{{ button_label|default('Enregistrer') }}</button>
+                {{ form_end(form) }}
+
+            </div>
+        </div>
+    </div>
+</div>
+

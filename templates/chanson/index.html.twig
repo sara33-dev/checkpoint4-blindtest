@@ -3,37 +3,50 @@
 {% block title %}Chanson index{% endblock %}
 
 {% block body %}
-    <h1>Chanson index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Titre</th>
-                <th>Artiste</th>
-                <th>YoutubeId</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for chanson in chansons %}
-            <tr>
-                <td>{{ chanson.id }}</td>
-                <td>{{ chanson.titre }}</td>
-                <td>{{ chanson.artiste }}</td>
-                <td>{{ chanson.youtubeId }}</td>
-                <td>
-                    <a href="{{ path('chanson_show', {'id': chanson.id}) }}">show</a>
+    <div class="d-flex justify-content-center mt-5">
+        <h2 class="border-light bg-info text-light btn mt-5">Gère le contenu des playlist</h2>
+    </div>
+    <p class="small d-flex justify-content-center"><em>Piège les joueurs en trouvons les sons les plus inattendus</em>
+    </p>
+    <div class=" form-register row justify-content-center align-content-center">
+        <div id="concept" class="home-section container bg-transparent col-11 rounded mb-5 pt-3 p-1 shadow mt-5">
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-6 col-sm-8 ">
 
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                    <a class="btn-info btn d-flex justify-content-end mb-2" href="{{ path('chanson_new') }}">Créer une
+                        chanson</a>
 
-    <a href="{{ path('chanson_new') }}">Create new</a>
+                    <a class="list-group">
+                        {% for chanson in chansons %}
+                        <a href="" class="list-group-item list-group-item-action">
+                            <div class="d-inline-flex">
+                                <div class="d-flex flex-column ">
+
+                                    <h5 class="mb-1"><span class="badge badge-info badge-pill">{{ loop.index }}</span> {{ chanson.titre }} - {{ chanson.artiste }} </h5>
+                                    <small>{{ chanson.youtubeId }}</small>
+                                    <p class="">Rangé dans la playlist : {{ chanson.playlistId.nom }}</p>
+                                </div>
+
+                                <div class="mt-5 ml-5">
+                                    <form method="post" action="{{ path('chanson_delete', {'id': chanson.id}) }}"
+                                          onsubmit="return confirm('Etes-vous sûr de supprimer cette chansons ?');">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ chanson.id) }}">
+                                        <button class="btn">
+                                            <i class="fas fa-times bg-info"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </a>
+
+                {% else %}
+                    no records found
+                {% endfor %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
