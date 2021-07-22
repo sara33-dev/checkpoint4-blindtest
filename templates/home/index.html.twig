@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BLINDTEST{% endblock %}
+
+{% block body %}
+
+   <div class="d-flex justify-content-center mt-5">
+
+      <div class="progress mt-5 w-50">
+         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+              aria-valuenow="{{ chanson.playlistId.id }}/{{ chanson.playlistId.chansons|length }}" aria-valuemin="0"
+              aria-valuemax="100"
+              style="width: {{ chanson.playlistId.id / chanson.playlistId.chansons|length *100 }}%">{{ chanson.playlistId.id }}
+            /{{ chanson.playlistId.chansons|length }}</div>
+      </div>
+
+   </div>
+
+   <div class="d-flex justify-content-end">
+      <div class="w-75 m-1">
+         <img class="spinner-border" src="{{ chanson.playlistId.urlImage }}" alt="imagePlaylist"
+              style="width: 50px;">{{ chanson.playlistId.nom }}<i class="fas fa-volume-down"></i>
+      </div>
+   </div>
+
+
+
+
+   <div class="d-flex justify-content-center ">
+
+      <div class="card bg-transparent border-info mt-5 w-50">
+
+         <div class="d-flex justify-content-center embed-responsive-21by9 mt-1">
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{ chanson.youtubeId[32:] }}"></iframe>
+         </div>
+         <div class="d-flex justify-content-center">   <i class="fas fa-play"></i> {{ chanson.titre }} - {{ chanson.artiste }}</div>
+      </div>
+   </div>
+
+   <div class="d-flex justify-content-center mt-5">
+      <ul class="list-group mt-5 w-50">
+         <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>RANG </span>
+            <span>PSEUDO </span>
+            <span class="badge badge-pill badge-info">POINTS</span>
+         </li>
+         {% for user in users %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+
+               <span>{{ loop.index }} </span>
+               <span>{{ user.pseudo }} </span>
+               {% if user.points %}
+                  <span class="badge badge-pill badge-info">{{ user.points }}</span>
+               {% else %}
+                  <span class="badge badge-pill badge-info">0</span>
+               {% endif %}
+            </li>
+         {% endfor %}
+      </ul>
+   </div>
+{% endblock %}

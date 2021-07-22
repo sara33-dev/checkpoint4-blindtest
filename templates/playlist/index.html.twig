@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Playlist index{% endblock %}
+
+{% block body %}
+    <h1 class="mt-5 d-flex justify-content-center">Playlists disponibles</h1>
+
+    <a href="{{ path('playlist_new') }}" >
+        <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Ajouter une nouvelle Playlist">
+
+            <i class="fas fa-plus  m-0 p-0"></i>
+    </button>
+    </a>
+    {% for playlist in playlists %}
+        <div class=" d-flex justify-content-center m-3">
+            <div class="card bg-transparent">
+                <div class="card-header  bg-info m-0 p-0">
+                    <div class="d-inline-flex">
+                        <h3>{{ playlist.nom }}</h3>
+                    <a href="{{ path('playlist_edit', {'id': playlist.id}) }}">
+                        <i class="fas fa-pen m-0 p-0"></i>
+                    </a>
+                    <form class="m-0 p-0" method="post" action="{{ path('playlist_delete', {'id': playlist.id}) }}"
+                          onsubmit="return confirm('Etes-vous sûr de supprimer cette playlist?');">
+                        <input type="hidden" name="_token"
+                               value="{{ csrf_token('delete' ~ playlist.id) }}">
+                        <button class="btn m-0 p-0">
+                            <i class="fas fa-trash badge-info m-0 p-0"></i>
+                        </button>
+                    </form>
+                    </div>
+                </div>
+
+                <div class="card-text mt-3 d-inline-flex">
+                    <img src="{{ playlist.urlImage }}" style="height: 100px; width: auto" class="figure-img img-fluid rounded"
+                                           alt="playlistImage">
+                    <p> <i class="fas fa-blind"></i> Défie un joueur sur ce blindtest !</p><br>
+
+                    <h1><i class="fas fa-play mt-5 btn btn-danger"></i></h1>
+                </div>
+
+                <div class="btn-group btn-info w-25">
+                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+                            data-display="static" aria-haspopup="true" aria-expanded="false">
+                        VOIR LES CHANSONS DE LA PLAYLIST ... Attention spoiler
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-right ">
+
+                        {% for chanson in playlist.chansons %}
+                            <span class="dropdown-item d-inline-flex">
+                                     <i class="fab fa-youtube"></i>
+                                     {{ chanson.titre }} - {{ chanson.artiste }}
+                                    <a href="{{ path('chanson_edit', {'id': chanson.id}) }}">
+                                        <i class="fas fa-pen  m-0 p-0"></i>
+                                    </a>
+                                    <form class=" m-0 p-0" method="post" action="{{ path('playlist_delete', {'id': chanson.id}) }}"
+                                          onsubmit="return confirm('Etes-vous sûr de supprimer cette chanson?');">
+                                        <input type="hidden" name="_token"
+                                               value="{{ csrf_token('delete' ~ chanson.id) }}">
+                                            <button class="btn m-0 p-0">
+                                                <i class="fas fa-trash alert-danger  m-0 p-0"> </i>
+                                            </button>
+                                    </form>
+                                </span>
+                        {% endfor %}
+                                    <button type="button" class="btn btn-info" data-container="body"
+                                            data-toggle="popover" data-placement="bottom" data-content="Bottom popover">
+                                        <a href="{{ path('chanson_new') }}"><i class="fas fa-plus  m-0 p-0"></i></a>
+                                    </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}Aucune chanson{% endfor %}
+
+{% endblock %}

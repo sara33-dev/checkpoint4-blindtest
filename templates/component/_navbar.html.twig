@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-transparent fixed-top mb-2 p-2">
+
+        <ul class="navbar-nav mb-5 border-bottom w-75" >
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('home') }}">HOME</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    PLAY
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">PARTICIPATE</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">CONNECT</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    ADMIN
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ path('playlist_new') }}">CREATE PLAYLIST</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{ path('playlist_index') }}">START A BLINDTEST</a>
+                </div>
+            </li>
+        </ul>
+
+</nav>
