@@ -4,10 +4,11 @@
 
 {% block body %}
 
-
+    {% if app.user %}
 <div class="d-flex justify-content-center">
     {{ include('component/_progress.html.twig') }}
 </div>
+    {% endif %}
     {{ include('component/_classement.html.twig') }}
 
     <div class="d-flex justify-content-center mt-5">
@@ -50,7 +51,9 @@
                 </a>
 
             {% endfor %}
+            {% if app.user %}
             <button class="btn btn-info mt-1">Valider</button>
+            {% endif %}
         </form>
 
     </div>
