@@ -1,0 +1,35 @@
+
+<div class="position-absolute d-inline-flex bottom-0 start-100">
+    {% if app.user %}
+        <div class="flex-column d-flex">
+            <mark class=" d-flex justify-content-center bg-light"> {{ app.user.pseudo }}</mark>
+            <small><strong>Tu ne vois plus rien, aide toi de ton chien .. </strong></small>
+            <img class="rounded-circle" src="{{ asset('build/images/chien.jpg') }}" alt="avatarLabrador"
+                 style="width: 150px;">
+        </div>
+    {% endif %}
+</div>
+<div class="d-flex justify-content-center mt-5 ">
+
+    <ul class="list-group mt-5 w-50 position-relative">
+
+        <li class="list-group-item d-flex justify-content-between align-items-center ">
+
+            <span>RANG </span>
+            <span>PSEUDO </span>
+            <span class="badge badge-pill badge-info">POINTS</span>
+        </li>
+        {% for user in users %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+
+                <span>{{ loop.index }} </span>
+                <span>{{ user.pseudo }} </span>
+                {% if user.points %}
+                    <span class="badge badge-pill badge-info">{{ user.points }}</span>
+                {% else %}
+                    <span class="badge badge-pill badge-info">0</span>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</div>
