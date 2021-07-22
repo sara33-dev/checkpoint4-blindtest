@@ -16,10 +16,10 @@
                     <a class="btn-info btn d-flex justify-content-end" href="{{ path('home') }}">Retour à l'accueil</a>
                     {% form_theme registrationForm 'bootstrap_4_layout.html.twig' %}
                     {{ form_start(registrationForm) }}
-                    {{ form_row(registrationForm.pseudo) }}
-                    {{ form_row(registrationForm.agreeTerms) }}
+                    {{ form_widget(registrationForm.pseudo) }}
                     <button type="submit" class="btn btn-info">Créer</button>
-                    {{ form_end(registrationForm, {'render_rest': false}) }}
+                    {{ form_end(registrationForm) }}
+
                 </div>
             </div>
         </div>

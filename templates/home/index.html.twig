@@ -11,6 +11,7 @@
     {% endif %}
     {{ include('component/_classement.html.twig') }}
 
+    {% if app.user %}
     <div class="d-flex justify-content-center mt-5">
 
     <div class=" mt-5 ">
@@ -21,17 +22,17 @@
 
                 <a class="list-group ">
 
-                    <div class="dropdown card  justify-content-center" style="width: 400px;" >
+                    <div class="dropdown card bg-transparent justify-content-center" style="width: 400px;" >
 
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <a href="" class="list-group-item  w-100">
-                                <h5 class="mb-1">Chanson mystère <span class="badge badge-info badge-pill">{{ loop.index }}</span></h5>
+                        <button class="btn btn-secondary border-info bg-transparent dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a href="" class="list-group-item bg-transparent">
+                                <h5 class="mb-1 text-light">CHANSON MYSTERE <span class="badge badge-info badge-pill">{{ loop.index }}</span></h5>
                             </a>
                         </button>
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
 
-                            <button class="dropdown-item" type="button">
+                            <button class="dropdown-item bg-transparent" type="button">
 
 
                                     <div class="d-flex justify-content-center embed-responsive-21by9 mt-1">
@@ -44,15 +45,17 @@
 
                         </div>
 
-                            <label for="titre"><strong>Titre : </strong></label>
+                        <label for="titre"> <span class="badge badge-info badge-pill">Titre : </span></label>
                             <input type="text" id="titre" name="title[{{ chanson.id }}]]"/>
 
                     </div>
                 </a>
 
             {% endfor %}
-            {% if app.user %}
+
             <button class="btn btn-info mt-1">Valider</button>
+            {% else %}
+        <h4 class=" mt-5 d-flex justify-content-center">CONNECTE TOI POUR AFFRONTER LES <br> AUTRES JOUEURS SUR UNE PLAYLIST</h4>
             {% endif %}
         </form>
 

@@ -2,7 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Form\RegistrationFormType;
+use App\Form\UserType;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -32,5 +38,30 @@ class SecurityController extends AbstractController
     public function logout()
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+    }
+
+    /**
+     * @Route ("/register", name="app_register")
+     */
+    public function register(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $user = new User();
+        $registrationForm = $this->createForm(UserType::class, $user);
+        $registrationForm->handleRequest($request);
+
+        if ($registrationForm->isSubmitted() && $registrationForm->isValid()) {
+            $user->setRoles(['ROLE_USER']);
+            $user->setPoints(0);
+            $entityManager->persist($user);
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute('home');
+        }
+
+        return $this->render('registration/register.html.twig',
+        [
+            'registrationForm' => $registrationForm->createView(),
+        ]);
     }
 }

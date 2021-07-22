@@ -1,5 +1,5 @@
 * {
-  font-family: ArialN;
+  font-family: "Apple Color Emoji";
   font: 18px/1.5;
   padding: 2px 6px;
 }
@@ -23,5 +23,10 @@ strong {
 
 iframe {
   filter : blur(20px);
+}
+
+.dropdown-item {
+  text-decoration-color: antiquewhite;
+  text-shadow: deeppink;
 }
 

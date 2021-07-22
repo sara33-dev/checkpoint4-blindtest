@@ -2,10 +2,12 @@
 <div class="position-absolute d-inline-flex bottom-0 start-100">
     {% if app.user %}
         <div class="flex-column d-flex">
-            <mark class=" d-flex justify-content-center bg-light"> {{ app.user.pseudo }}</mark>
-            <small><strong>Tu ne vois plus rien, aide toi de ton chien .. </strong></small>
-            <img class="rounded-circle" src="{{ asset('build/images/chien.jpg') }}" alt="avatarLabrador"
-                 style="width: 150px;">
+            <div class="badge badge-info text-wrap" style="width: 6rem;">
+                <mark class=" d-flex justify-content-center bg-light"> {{ app.user.pseudo }}</mark>
+                <small><strong>Tu ne vois plus rien, aide toi de ton chien .. </strong></small>
+                <img class="rounded-circle" src="{{ asset('build/images/chien.jpg') }}" alt="avatarLabrador"
+                     style="width: 150px;">
+            </div>
         </div>
     {% endif %}
 </div>
